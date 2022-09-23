@@ -76,7 +76,17 @@ const codegen = {
         import { forwardRef } from 'preact/compat';
         export default /*@__PURE__*/ forwardRef((props, ref) => h('svg', { ...props, ref, viewBox: '${viewBox}' }, h('use', { href: ${symbol} })));
       `
-  }
+  },
+  qwik: {
+    dev: (xml: any): string => `
+        import { component$ } from '@builder.io/qwik';
+        export default component$((props) => <div>Test</div>);
+      `,
+    prod: (viewBox: string, symbol: string): string => `
+      import { component$ } from '@builder.io/qwik';
+      export default component$((props) => <div>Test</div>);
+      `
+  },
 }
 
 export function inlineSymbol (xml: any): string {
